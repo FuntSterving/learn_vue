@@ -1,34 +1,34 @@
 <template>
     <Button icon="pi pi-plus" @click="toggleVisible" />
-    <Dialog v-model:visible="visible" modal header="Выставить автомобиль" :style="` width: '50vw' `">
+    <Dialog v-model:visible="visible" modal header="Выставить автомобиль" :style="` width: '70%' `">
 
         <template #default>
             <div class="p-fluid">
-                <div class="p-field">
+                <div class="p-field cont">
                     <label for="brand">Бренд</label>
                     <Dropdown id="brand" v-model="car.brand" editable :options="brandLabel" option-label="brand"
                         option-value="brand" placeholder="Выбор бренда" />
                 </div>
-                <div class="p-field">
+                <div class="p-field cont">
                     <label for="price">Цена</label>
                     <InputNumber id="price" v-model="car.price" mode="currency" currency="KZT" locale="ru-ru" />
                 </div>
-                <div class="p-field">
+                <div class="p-field cont">
                     <label for="year">Год</label>
                     <Calendar id="year" v-model="car.year" view="year" dateFormat="yy" />
                 </div>
-                <div class="p-field">
+                <div class="p-field cont">
                     <label for="volume">Объем</label>
                     <!-- InputNumber -->
                     <InputNumber id="volume" v-model="car.volume" />
                 </div>
-                <div class="p-field" style="margin: 5px 0px 5px 0px;">
+                <div class="p-field cont">
                     <label for="color">Цвет</label>
                     <!-- ColorPicker -->
-                    <ColorPicker v-model="car.color" style="width: 30px; margin: 5px 0px 5px 0px;" />
+                    <ColorPicker v-model="car.color" />
 
                 </div>
-                <div class="p-field">
+                <div class="p-field cont">
                     <label for="city">Город</label>
                     <!-- DropDown -->
 
@@ -36,7 +36,7 @@
                         option-value="city" placeholder="Выбор города" />
 
                 </div>
-                <div class="p-field">
+                <div class="p-field cont">
                     <label for="carcase">Кузов</label>
                     <!-- DropDown -->
                     <Dropdown id="carcase" v-model="car.carcase" editable :options="carCarcase" option-label="carcase"
@@ -44,22 +44,24 @@
 
 
                 </div>
-                <div class="p-field">
+                <div class="p-field cont">
                     <label for="gear">Коробка</label>
                     <!-- RadioButton -->
-                    <div style=" margin: 10px;">
+                    <div class="radio-button-group">
                         <RadioButton id="gear" v-model="car.gear" inputId="ingredient1" name="gear" value="Автомат" />
                         <label for="ingredient1" class="ml-2">Автомат</label>
 
-                        <RadioButton id="gear" v-model="car.gear" inputId="ingredient2" name="gear" value="Механика" />
+                        <RadioButton id="gear" v-model="car.gear" inputId="ingredient2" name="gear" value="Механика"
+                            style="margin-left: 15px;" />
                         <label for="ingredient2" class="ml-2">Механика</label>
                     </div>
                 </div>
-                <div class="p-field" style="margin-top: 15px;">
+                <div class="p-field cont">
                     <!-- Slider -->
                     <label for="travel">Пробег</label>
-                    <Slider id="travel" v-model="car.travel" class="w-14rem" />
-                   
+                    <div class="slider-cont">
+                        <Slider id="travel" v-model="car.travel" class="w-14rem" style="margin-top: 10px;" />
+                    </div>
                 </div>
             </div>
         </template>
@@ -80,6 +82,7 @@ import Calendar from 'primevue/calendar';
 import ColorPicker from 'primevue/colorpicker';
 import RadioButton from 'primevue/radiobutton';
 import Slider from 'primevue/slider';
+import InputMask from 'primevue/inputmask';
 
 const visible = ref(false);
 
@@ -146,3 +149,87 @@ const carCarcase = [
     { carcase: 'Кузова вне классификации' },
 ]
 </script>
+<style scoped>
+.p-field {
+    margin-bottom: 20px;
+}
+
+.p-field label {
+    margin-bottom: 5px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+
+}
+
+.p-dropdown {
+    width: 100%;
+
+}
+
+.p-inputnumber {
+    width: 100%;
+
+}
+
+
+.p-calendar {
+    width: 100%;
+
+}
+
+/* Стили для ColorPicker */
+.p-colorpicker {
+    width: 100%;
+    margin-top: 5px;
+    border: 1px solid #d3dbe3;
+
+    color: #043d75;
+    background: #ffffff;
+    padding: 0.75rem 0.75rem;
+    border: 1px solid #d3dbe3;
+
+    border-radius: 6px;
+
+}
+
+
+.radio-button-group {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    border: 1px solid #d3dbe3;
+
+    color: #043d75;
+    background: #ffffff;
+    padding: 0.75rem 0.75rem;
+    border: 1px solid #d3dbe3;
+
+    border-radius: 6px;
+}
+
+.radio-button-group label {
+    margin-left: 10px;
+    /* Отступ между радиокнопками и метками */
+}
+
+
+.p-field label[for="travel"] {
+    margin-bottom: 10px;
+
+}
+
+.slider-cont {
+    width: 100%;
+    height: 45px;
+    border: 1px solid #d3dbe3;
+    color: #043d75;
+    background: #ffffff;
+    padding: 0.75rem 0.75rem;
+    border: 1px solid #d3dbe3;
+
+    border-radius: 6px;
+}
+</style>
