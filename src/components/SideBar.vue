@@ -24,7 +24,7 @@
                         <label for="value">Description</label>
                     </span>
                     <small id="text-error" class="p-error">{{ errorMessage || '&nbsp;' }}</small>
-                    <Button type="submit" label="Submit" />
+                    <Button type="submit" label="Submit" class="btnSbm" />
                 </form>
                 <Toast />
             </div>
@@ -34,11 +34,6 @@
 
     </div>
 </template>
-
-
-
-
-
 
 <script setup>
 import Sidebar from 'primevue/sidebar';
@@ -89,9 +84,8 @@ const onSubmit = handleSubmit((values) => {
 
 .sidebar-menu h2 {
     font-size: 18px;
-    /* Размер заголовка */
     margin-bottom: 10px;
-    /* Отступ между заголовком и списком */
+   
 }
 
 .sidebar-menu li {
@@ -106,6 +100,9 @@ const onSubmit = handleSubmit((values) => {
 
 .sidebar-menu a:hover {
     text-decoration: underline;
+}
+.btnSbm{
+    margin: 5px;
 }
 </style>
 
