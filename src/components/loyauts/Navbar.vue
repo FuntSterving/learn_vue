@@ -2,6 +2,7 @@
 import Menubar from 'primevue/menubar';
 import InputText from 'primevue/inputtext';
 import Button from 'primevue/button'
+import Toast from 'primevue/toast';
 
 
 import { useAuto } from '@/composable/useAuto'
@@ -15,7 +16,8 @@ onMounted(async () => {
   await createAuto()
 })
 
-
+import { useToast } from "primevue/usetoast";
+const toast = useToast();
 
 const googleRegister = () => {
   const auth = getAuth()
@@ -25,10 +27,12 @@ const googleRegister = () => {
     .then((userCredential) => {
       const user = userCredential.user
       localStorage.setItem('user', JSON.stringify(user))
+      toast.add({ severity: 'success', summary: 'Logged in', detail: '', life: 4000 });
     })
     .catch((error) => {
       const errorCode = error.code
       const errorMessage = error.message
+      toast.add({ severity: 'warn', summary: 'ERROR', detail: error.message, life: 3000 });
       console.log(errorCode, errorMessage)
     })
 }
@@ -36,11 +40,11 @@ const googleRegister = () => {
 <template>
   <Menubar :model="items">
     <template #start>
-      
       <img alt="logo" src="https://www.nicepng.com/png/full/920-9203332_car-logo-png-hot-wheels-car-svg.png" height="50"
         class="mr-2" />
     </template>
     <template #end>
+      <Toast />
       <button type="button" class="p-link p-ml-auto" @click="googleRegister" style="margin: 10px;">
         <i class="pi pi-user"></i>
       </button>
@@ -58,7 +62,3 @@ const googleRegister = () => {
 
 <style scoped ></style>
 
-
-
-  
-  

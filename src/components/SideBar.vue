@@ -16,11 +16,26 @@
                 <li><a href="#">Классические автомобили</a></li>
                 <li><a href="#">SUV и внедорожники</a></li>
             </ul>
+
+            <div class="card flex justify-content-center">
+                <form @submit="onSubmit" class="flex flex-column gap-2">
+                    <span class="p-float-label">
+                        <Textarea id="value" v-model="value" :class="{ 'p-invalid': errorMessage }" rows="4" cols="30" aria-describedby="text-error" />
+                        <label for="value">Description</label>
+                    </span>
+                    <small id="text-error" class="p-error">{{ errorMessage || '&nbsp;' }}</small>
+                    <Button type="submit" label="Submit" />
+                </form>
+                <Toast />
+            </div>
+
         </Sidebar>
         <Button icon="pi pi-arrow-right" rounded outlined @click="visible = true" class="btn" />
 
     </div>
 </template>
+
+
 
 
 
@@ -36,7 +51,30 @@ import Button from 'primevue/button';
 
 
 const value1 = ref(null);
-const value2 = ref(null);
+
+import Textarea from 'primevue/textarea';
+import Toast from 'primevue/toast';
+import { useToast } from 'primevue/usetoast';
+import { useField, useForm } from 'vee-validate';
+
+const { handleSubmit, resetForm } = useForm();
+const { value, errorMessage } = useField('value', validateField);
+const toast = useToast();
+
+function validateField(value) {
+    if (!value) {
+        return 'Description is required.';
+    }
+
+    return true;
+}
+
+const onSubmit = handleSubmit((values) => {
+    if (values.value && values.value.length > 0) {
+        toast.add({ severity: 'info', summary: 'Form Submitted', detail: values.value, life: 3000 });
+        resetForm();
+    }
+});
 </script>
 
 <style scoped>
@@ -70,3 +108,13 @@ const value2 = ref(null);
     text-decoration: underline;
 }
 </style>
+
+
+
+
+
+
+
+
+
+
