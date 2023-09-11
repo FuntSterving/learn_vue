@@ -20,7 +20,7 @@
                 <div class="p-field cont">
                     <label for="volume">Объем</label>
                     <!-- InputNumber -->
-                    <InputNumber id="volume" v-model="car.volume" />
+                    <InputNumber id="volume" v-model="car.volume"  />
                 </div>
                 <div class="p-field cont">
                     <label for="color">Цвет</label>
@@ -40,7 +40,7 @@
                     <label for="carcase">Кузов</label>
                     <!-- DropDown -->
                     <Dropdown id="carcase" v-model="car.carcase" editable :options="carCarcase" option-label="carcase"
-                        option-value="carcase" placeholder="Выбор города" />
+                        option-value="carcase" placeholder="Выбор кузова" />
 
 
                 </div>
@@ -60,7 +60,7 @@
                     <!-- Slider -->
                     <label for="travel">Пробег</label>
                     <div class="slider-cont">
-                        <Slider id="travel" v-model="car.travel" class="w-14rem" style="margin-top: 10px;" />
+                        <Slider id="travel" v-model="car.travel" class="w-14rem" style="margin-top: 7px;" />
                     </div>
                 </div>
             </div>
@@ -82,7 +82,7 @@ import Calendar from 'primevue/calendar';
 import ColorPicker from 'primevue/colorpicker';
 import RadioButton from 'primevue/radiobutton';
 import Slider from 'primevue/slider';
-import InputMask from 'primevue/inputmask';
+
 
 const visible = ref(false);
 
