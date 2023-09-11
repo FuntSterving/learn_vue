@@ -3,6 +3,7 @@ import Menubar from 'primevue/menubar';
 import InputText from 'primevue/inputtext';
 import Button from 'primevue/button'
 
+
 import { useAuto } from '@/composable/useAuto'
 
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
@@ -35,6 +36,7 @@ const googleRegister = () => {
 <template>
   <Menubar :model="items">
     <template #start>
+      
       <img alt="logo" src="https://www.nicepng.com/png/full/920-9203332_car-logo-png-hot-wheels-car-svg.png" height="50"
         class="mr-2" />
     </template>

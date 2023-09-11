@@ -21,6 +21,6 @@ defineProps  ({
 <style scoped>
 .flexTemplate {
     display: flex;
-    margin-top: 20px;
+    margin-bottom: 20px;
 }
 </style>

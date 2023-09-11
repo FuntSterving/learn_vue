@@ -4,6 +4,9 @@ import CarList from '@/components/CarList.vue';
 import Navbar from '@/components/loyauts/Navbar.vue';
 import Footer from '@/components/Footer.vue';
 import CarTable from '@/components/CarTable.vue';
+import SideBar from '@/components/SideBar.vue';
+
+
 
 const cars = [
     {
@@ -38,6 +41,7 @@ const cars = [
 
 <template>
     <Navbar />
+    <SideBar />
     <CarList :cars="cars" />
     <CarTable :cars="cars" />
     <Footer />
