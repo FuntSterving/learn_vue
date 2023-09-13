@@ -9,6 +9,7 @@ import { useAuto } from '@/composable/useAuto'
 
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
 import { onMounted } from 'vue';
+import { ref } from "vue";
 
 const { auto, createAuto } = useAuto()
 
@@ -35,13 +36,61 @@ const googleRegister = () => {
       toast.add({ severity: 'warn', summary: 'ERROR', detail: error.message, life: 3000 });
       console.log(errorCode, errorMessage)
     })
-}
+};
+
+const items = ref([
+
+  {
+    label: 'Add New Car',
+    icon: 'pi pi-fw pi-plus',
+
+  },
+  {
+    label: 'Users',
+    icon: 'pi pi-fw pi-user',
+    items: [
+      {
+        label: 'Log in',
+        icon: ' pi pi-google'
+      },
+      {
+        label: 'Sign up',
+        icon: 'pi pi-check'
+      },
+    ]
+  },
+  {
+    label: 'Sales',
+    icon: 'pi pi-shopping-cart',
+    items: [
+      {
+        label: 'Сatalog',
+        icon: 'pi pi-book',
+      },
+      {
+        label: 'Contacts',
+        icon: 'pi pi-megaphone'
+      },
+      {
+        label: 'Cart',
+        icon: 'pi pi-shopping-bag'
+      },
+    ]
+  },
+  {
+    label: 'Quit',
+    icon: 'pi pi-fw pi-power-off'
+  }
+]);
 </script>
 <template>
   <Menubar :model="items">
     <template #start>
       <img alt="logo" src="https://www.nicepng.com/png/full/920-9203332_car-logo-png-hot-wheels-car-svg.png" height="50"
         class="mr-2" />
+    </template>
+    <template #default>
+      <Menubar :model="items" />
     </template>
     <template #end>
       <Toast />
