@@ -1,25 +1,44 @@
 import { collection, getDocs, addDoc } from "firebase/firestore";
 import { db } from "@/firebases";
 import { getStorage, uploadBytes, getDownloadURL } from "firebase/storage";
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import { createId } from "@/services/method";
+import { formatDate } from "@/services/method";
 
 export const useAuto = () => {
-  const auto = ref({
-    id: "",
+  const newAuto = ref({
+    id: createId(),
     brand: "",
     price: "",
-    saled: false,
-    city: "",
-    carcase: "",
+    year: "",
     volume: "",
     color: "",
+    city: "",
+    carcase: "",
     gear: "",
-    year: "",
-    travel: "",
-    images: [],
+    travel: 0,
+    image: null,
+    saled: false,
   });
   const autoList = ref([]);
-  const newAuto = ref({});
+  const auto = ref({});
+
+  function clear() {
+    newAuto.value = {
+      id: "",
+      brand: "",
+      price: "",
+      year: "",
+      volume: "",
+      color: "",
+      city: "",
+      carcase: "",
+      gear: "",
+      travel: 0,
+      image: null,
+      saled: false,
+    };
+  }
 
   const loading = ref({
     auto: false,
@@ -27,11 +46,24 @@ export const useAuto = () => {
     newAuto: false,
   });
 
+  const autoListRemake = computed(() => {
+    const _autoListRemake = autoList.value.map((auto) => {
+      auto.price = ` ${parseInt(auto.price)} KZT`;
+      auto.volume = ` ${auto.volume} л`;
+      auto.travel = `${auto.travel} км`;
+      auto.year = formatDate(auto.year);
+      auto.age = `${new Date().getFullYear() - auto.year}г`;
+      auto.color = ` #${auto.color}`;
+      return auto;
+    });
+    return _autoListRemake || [];
+  });
+
   async function createAuto() {
     loading.value.newAuto = true;
     try {
-      await addDoc(collection(db, "autos"), newAuto.value).then(() => {
-        console.log("Cars added");
+      await addDoc(collection(db, "autos"), newAuto.value).then(async () => {
+        await getAutoList();
       });
     } catch (e) {
       console.error("Error: ", e);
@@ -55,8 +87,10 @@ export const useAuto = () => {
   return {
     createAuto,
     getAutoList,
+    clear,
     auto,
-    autoList,
+    newAuto,
+    autoListRemake,
     loading,
   };
 };

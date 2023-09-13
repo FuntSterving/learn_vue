@@ -5,17 +5,8 @@ import Button from 'primevue/button'
 import Toast from 'primevue/toast';
 
 
-import { useAuto } from '@/composable/useAuto'
-
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
-import { onMounted } from 'vue';
 import { ref } from "vue";
-
-const { auto, createAuto } = useAuto()
-
-onMounted(async () => {
-  await createAuto()
-})
 
 import { useToast } from "primevue/usetoast";
 const toast = useToast();
