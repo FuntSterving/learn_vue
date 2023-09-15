@@ -31,7 +31,7 @@
             </div>
 
         </Sidebar>
-        <Button icon="pi pi-arrow-right" rounded outlined @click="visible = true" class="btn" />
+        <Button icon="pi pi-arrow-left" @click="visible = true" class="btn" />
 
     </div>
 </template>
@@ -75,7 +75,26 @@ const onSubmit = handleSubmit((values) => {
 
 <style scoped>
 .btn {
-    margin: 5px 0px 0px 5px;
+    margin: 10px 0px 10px 0px;
+    position: sticky;
+    top: 120px;
+    /* Указываем, на какой высоте кнопка должна оставаться зафиксированной */
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    background: #eff3f8;
+    color: #043d75;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+
+}
+
+.btn:hover {
+    background-color: #b4c0cb;
+    color: #fff; 
+    transition: background-color 0.3s, color 0.3s; 
+    cursor: pointer;
+    border: 1px solid #e2e8ee;
 }
 
 .sidebar-menu {

@@ -25,22 +25,9 @@
                 <div class="p-field cont">
                     <label for="color">Цвет</label>
                     <!-- ColorPicker -->
-                    <ColorPicker :readonly="true" v-model="newAuto.color" />
+                    <ColorPicker v-model="newAuto.color" />
                 </div>
 
-                <div class="p-field cont">
-                    <label for="saled">Наличие</label>
-                    <!-- RadioButton -->
-                    <div class="radio-button-group">
-                        <RadioButton id="saled" :readonly="true" v-model="newAuto.saled" inputId="ingredient1" name="saled"
-                            value="Продано" />
-                        <label for="ingredient1" :readonly="true" class="ml-2">Продано</label>
-
-                        <RadioButton id="saled" v-model="newAuto.saled" inputId="ingredient2" name="saled" value="В наличии"
-                            style="margin-left: 15px;" />
-                        <label for="ingredient2" class="ml-2">В наличии</label>
-                    </div>
-                </div>
                 <div class="p-field cont">
                     <label for="city">Город</label>
                     <!-- DropDown -->
@@ -77,6 +64,12 @@
                             style="margin-top: 7px;" />
                     </div>
                 </div>
+                <div class="p-field cont">
+                    <label for="photo">Картинки</label>
+                    <FileUpload id="photo" v-model="newAuto.image" mode="basic" accept="image/*" :maxFileSize="1000000"
+                        @select="onUpload" />
+                </div>
+
             </div>
         </template>
         <template #footer>
@@ -97,8 +90,10 @@ import ColorPicker from 'primevue/colorpicker';
 import RadioButton from 'primevue/radiobutton';
 import Slider from 'primevue/slider';
 import { useAuto } from '@/composable/useAuto'
+import FileUpload from 'primevue/fileupload';
 
-const { newAuto, createAuto, loading, clear } = useAuto()
+
+const { newAuto, createAuto, loading, clear, uploadImage } = useAuto()
 
 
 
@@ -111,6 +106,9 @@ const toggleVisible = () => {
 async function addAuto() {
     await createAuto()
     toggleVisible()
+}
+async function uploadImage() {
+    await onUpload()
 }
 
 function clearAuto() {

@@ -69,9 +69,9 @@ const items = ref([
 ]);
 </script>
 <template>
-  <Menubar :model="items">
+  <Menubar :model="items" class="menuBar">
     <template #start>
-      <img alt="logo" src="https://www.nicepng.com/png/full/920-9203332_car-logo-png-hot-wheels-car-svg.png" height="50"
+      <img alt="logo" src="https://www.nicepng.com/png/full/920-9203332_car-logo-png-hot-wheels-car-svg.png" height="45"
         class="mr-2" />
     </template>
 
@@ -100,11 +100,9 @@ const items = ref([
 </template>
 
 <style scoped >
-.centered-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
+.menuBar {
+  border: 1px solid #dee2e6;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }
 </style>
 

@@ -36,7 +36,7 @@ export const useAuto = () => {
       gear: "",
       travel: 0,
       image: null,
-      saled: "",
+      saled: false,
     };
   }
 
@@ -53,7 +53,7 @@ export const useAuto = () => {
       auto.travel = `${auto.travel} км`;
       auto.year = formatDate(auto.year);
       auto.age = `${new Date().getFullYear() - auto.year}г`;
-      auto.color = ` #${auto.color}`;
+      auto.color = `#${auto.color}`;
       return auto;
     });
     return _autoListRemake || [];
@@ -84,10 +84,17 @@ export const useAuto = () => {
     }
   }
 
+  async function uploadImage(){
+    
+  }
+
+
+  
   return {
     createAuto,
     getAutoList,
     clear,
+    uploadImage,
     auto,
     newAuto,
     autoListRemake,
