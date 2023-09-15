@@ -36,7 +36,7 @@ export const useAuto = () => {
       gear: "",
       travel: 0,
       image: null,
-      saled: false,
+      saled: "",
     };
   }
 

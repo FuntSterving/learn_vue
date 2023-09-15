@@ -23,6 +23,7 @@ import router from "./router";
 
 import ToastService from "primevue/toastservice";
 
+
 initializeApp(firebaseConfig);
 
 const app = createApp(App);

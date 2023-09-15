@@ -20,7 +20,8 @@
             <div class="card flex justify-content-center">
                 <form @submit="onSubmit" class="flex flex-column gap-2">
                     <span class="p-float-label">
-                        <Textarea id="value" v-model="value" :class="{ 'p-invalid': errorMessage }" rows="4" cols="30" aria-describedby="text-error" />
+                        <Textarea id="value" v-model="value" :class="{ 'p-invalid': errorMessage }" rows="4" cols="30"
+                            aria-describedby="text-error" />
                         <label for="value">Description</label>
                     </span>
                     <small id="text-error" class="p-error">{{ errorMessage || '&nbsp;' }}</small>
@@ -85,7 +86,7 @@ const onSubmit = handleSubmit((values) => {
 .sidebar-menu h2 {
     font-size: 18px;
     margin-bottom: 10px;
-   
+
 }
 
 .sidebar-menu li {
@@ -101,7 +102,8 @@ const onSubmit = handleSubmit((values) => {
 .sidebar-menu a:hover {
     text-decoration: underline;
 }
-.btnSbm{
+
+.btnSbm {
     margin: 5px;
 }
 </style>

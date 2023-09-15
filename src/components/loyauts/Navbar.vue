@@ -19,6 +19,7 @@ const googleRegister = () => {
     .then((userCredential) => {
       const user = userCredential.user
       localStorage.setItem('user', JSON.stringify(user))
+      console.log(localStorage.getItem("user"))
       toast.add({ severity: 'success', summary: 'Logged in', detail: '', life: 4000 });
     })
     .catch((error) => {
@@ -28,6 +29,17 @@ const googleRegister = () => {
       console.log(errorCode, errorMessage)
     })
 };
+const availabilityTrue = () => {
+  const user = JSON.parse(localStorage.getItem('user'));
+  return user === null;
+};
+
+const logOut = () => {
+  localStorage.removeItem('user');
+  toast.add({ severity: 'info', summary: 'Logged out', detail: '', life: 3000 });
+};
+
+
 
 const items = ref([
 
@@ -37,41 +49,23 @@ const items = ref([
 
   },
   {
-    label: 'Users',
-    icon: 'pi pi-fw pi-user',
-    items: [
-      {
-        label: 'Log in',
-        icon: ' pi pi-google'
-      },
-      {
-        label: 'Sign up',
-        icon: 'pi pi-check'
-      },
-    ]
-  },
-  {
     label: 'Sales',
     icon: 'pi pi-shopping-cart',
-    items: [
-      {
-        label: 'Сatalog',
-        icon: 'pi pi-book',
-      },
-      {
-        label: 'Contacts',
-        icon: 'pi pi-megaphone'
-      },
-      {
-        label: 'Cart',
-        icon: 'pi pi-shopping-bag'
-      },
-    ]
   },
   {
-    label: 'Quit',
-    icon: 'pi pi-fw pi-power-off'
-  }
+    label: 'Сatalog',
+    icon: 'pi pi-book',
+  },
+  {
+    label: 'Contacts',
+    icon: 'pi pi-megaphone'
+  },
+  {
+    label: 'Cart',
+    icon: 'pi pi-shopping-bag'
+  },
+
+
 ]);
 </script>
 <template>
@@ -80,14 +74,19 @@ const items = ref([
       <img alt="logo" src="https://www.nicepng.com/png/full/920-9203332_car-logo-png-hot-wheels-car-svg.png" height="50"
         class="mr-2" />
     </template>
-    <template #default>
-      <Menubar :model="items" />
-    </template>
+
     <template #end>
       <Toast />
-      <button type="button" class="p-link p-ml-auto" @click="googleRegister" style="margin: 10px;">
-        <i class="pi pi-user"></i>
+      <button type="button" class="p-link p-ml-auto" @click="googleRegister"
+        style="margin: 10px; border: 1px solid #d3dbe3; padding: 5px;" v-if="availabilityTrue()">
+        <i class="pi pi-user" style="margin: 10px;"></i>Войти
       </button>
+
+      <button type="button" class="p-link p-ml-auto" @click="logOut"
+        style="margin: 10px; border: 1px solid #d3dbe3; padding: 5px;" v-else>
+        <i class="pi pi-user" style="margin: 10px;"></i>Выйти
+      </button>
+
       <button type="button" class="p-link p-ml-auto" @click="createAuto" style="margin: 10px;">
         <i class="pi pi-plus"></i>
       </button>
@@ -100,5 +99,12 @@ const items = ref([
   </Menubar>
 </template>
 
-<style scoped ></style>
+<style scoped >
+.centered-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+</style>
 

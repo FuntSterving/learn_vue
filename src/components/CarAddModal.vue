@@ -25,8 +25,21 @@
                 <div class="p-field cont">
                     <label for="color">Цвет</label>
                     <!-- ColorPicker -->
-                    <ColorPicker v-model="newAuto.color" />
+                    <ColorPicker :readonly="true" v-model="newAuto.color" />
+                </div>
 
+                <div class="p-field cont">
+                    <label for="saled">Наличие</label>
+                    <!-- RadioButton -->
+                    <div class="radio-button-group">
+                        <RadioButton id="saled" :readonly="true" v-model="newAuto.saled" inputId="ingredient1" name="saled"
+                            value="Продано" />
+                        <label for="ingredient1" :readonly="true" class="ml-2">Продано</label>
+
+                        <RadioButton id="saled" v-model="newAuto.saled" inputId="ingredient2" name="saled" value="В наличии"
+                            style="margin-left: 15px;" />
+                        <label for="ingredient2" class="ml-2">В наличии</label>
+                    </div>
                 </div>
                 <div class="p-field cont">
                     <label for="city">Город</label>
@@ -74,7 +87,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import Dialog from 'primevue/dialog';
 import Button from 'primevue/button';
 import Dropdown from 'primevue/dropdown';
@@ -86,6 +99,8 @@ import Slider from 'primevue/slider';
 import { useAuto } from '@/composable/useAuto'
 
 const { newAuto, createAuto, loading, clear } = useAuto()
+
+
 
 
 const visible = ref(false);
