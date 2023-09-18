@@ -22,7 +22,7 @@ function changeColor(color) {
 <template>
   <Card style="width: 30em; " class="card">
     <template #header>
-      <img  alt="car" class="car-image" />
+      <img :src="auto.image" alt="" style="width: 250px; height: 150px;">
     </template>
     <template #title> {{ auto.brand }} </template>
     <template #content>

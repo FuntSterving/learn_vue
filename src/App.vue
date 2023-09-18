@@ -6,6 +6,8 @@ import Footer from '@/components/Footer.vue';
 import CarTable from '@/components/CarTable.vue';
 import SideBar from '@/components/SideBar.vue';
 import CarAddModal from '@/components/CarAddModal.vue';
+import router from './router';
+import { RouterView  } from 'vue-router';
 
 
 
@@ -43,12 +45,13 @@ import CarAddModal from '@/components/CarAddModal.vue';
 </script>
 
 <template>
-    <CarAddModal />
+    <!-- <CarAddModal /> -->
     <Navbar />
-    <SideBar />
+    <router-view />
+    <!-- <SideBar />
     <CarList />
     <CarTable />
-    <Footer />
+    <Footer /> -->
 </template>
 
 <style scoped></style>

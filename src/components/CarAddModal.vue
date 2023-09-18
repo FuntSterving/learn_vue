@@ -64,10 +64,28 @@
                             style="margin-top: 7px;" />
                     </div>
                 </div>
-                <div class="p-field cont">
+
+                <!-- <form class="input__wrapper" enctype="multipart/form-data">
+                    <input id="inputfile" class="input inputfile" name="images" type="file" accept=".jpg, .png"
+                        @input="onUpload($event)" />
+                    <label for="inputfile" class="inputfile-button">
+                        <span class="input__file-icon-wrapper">
+                            <img class="input__file-icon" src="@/assets/Upload-Image.png" alt="Выбрать файл" width="25" />
+                        </span>
+                        <span class="input__file-button-text">Машинка</span>
+                    </label>
+                </form> -->
+
+                <!-- <div class="p-field">
                     <label for="photo">Картинки</label>
-                    <FileUpload id="photo" v-model="newAuto.image" mode="basic" accept="image/*" :maxFileSize="1000000"
-                        @select="onUpload" />
+                    <FileUpload id="photo" v-model="newAuto.image" mode="basic" accept="image/*"
+                        @select="onUpload($event)" />
+                </div> -->
+
+                <div class="p-field">
+                    <label for="travel">Картинка</label>
+                    <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" :maxFileSize="1000000"
+                        @input="onUpload($event)" />
                 </div>
 
             </div>
@@ -89,8 +107,9 @@ import Calendar from 'primevue/calendar';
 import ColorPicker from 'primevue/colorpicker';
 import RadioButton from 'primevue/radiobutton';
 import Slider from 'primevue/slider';
-import { useAuto } from '@/composable/useAuto'
+import { useAuto } from '@/composable/useAuto';
 import FileUpload from 'primevue/fileupload';
+
 
 
 const { newAuto, createAuto, loading, clear, uploadImage } = useAuto()
@@ -107,9 +126,12 @@ async function addAuto() {
     await createAuto()
     toggleVisible()
 }
-async function uploadImage() {
-    await onUpload()
+
+async function onUpload(e) {
+    const image = e.target.files[0]
+    await uploadImage(image)
 }
+
 
 function clearAuto() {
     clear()

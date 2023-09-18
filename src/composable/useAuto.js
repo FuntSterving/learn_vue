@@ -2,10 +2,11 @@ import { collection, getDocs, addDoc } from "firebase/firestore";
 import { db } from "@/firebases";
 import { getStorage, uploadBytes, getDownloadURL } from "firebase/storage";
 import { ref, computed } from "vue";
-import { createId } from "@/services/method";
-import { formatDate } from "@/services/method";
+import { createId, formatDate } from "@/services/method";
+import * as firebase from "firebase/storage";
 
 export const useAuto = () => {
+  // reactive part
   const newAuto = ref({
     id: createId(),
     brand: "",
@@ -20,25 +21,9 @@ export const useAuto = () => {
     image: null,
     saled: false,
   });
-  const autoList = ref([]);
-  const auto = ref({});
 
-  function clear() {
-    newAuto.value = {
-      id: "",
-      brand: "",
-      price: "",
-      year: "",
-      volume: "",
-      color: "",
-      city: "",
-      carcase: "",
-      gear: "",
-      travel: 0,
-      image: null,
-      saled: false,
-    };
-  }
+  const autoList = ref([]);
+  const auto = ref(null);
 
   const loading = ref({
     auto: false,
@@ -48,8 +33,8 @@ export const useAuto = () => {
 
   const autoListRemake = computed(() => {
     const _autoListRemake = autoList.value.map((auto) => {
-      auto.price = ` ${parseInt(auto.price)} KZT`;
-      auto.volume = ` ${auto.volume} л`;
+      auto.price = `${parseInt(auto.price)} KZT`;
+      auto.volume = `${auto.volume} л`;
       auto.travel = `${auto.travel} км`;
       auto.year = formatDate(auto.year);
       auto.age = `${new Date().getFullYear() - auto.year}г`;
@@ -84,12 +69,49 @@ export const useAuto = () => {
     }
   }
 
-  async function uploadImage(){
-    
+  async function uploadImage(file) {
+    const storage = getStorage();
+    const storageRef = firebase.ref(storage, "autos/" + file.name);
+
+    uploadBytes(storageRef, file)
+      .then(() => {
+        console.log("Файл успешно загружен!");
+
+        firebase.getDownloadURL(storageRef)
+          .then((downloadURL) => {
+            newAuto.value.image = downloadURL;
+          })
+          .catch((error) => {
+            console.error(
+              "Ошибка получения ссылки на загруженный файл:",
+              error
+            );
+          });
+      })
+      .catch((error) => {
+        console.error("Ошибка загрузки файла:", error);
+      });
   }
 
+  function clear() {
+    newAuto.value = {
+      id: "",
+      brand: "",
+      price: "",
+      year: "",
+      volume: "",
+      color: "",
+      city: "",
+      carcase: "",
+      gear: "",
+      travel: 0,
+      image: null,
+      saled: false,
+    };
+    autoList.value = [];
+    auto.value = null;
+  }
 
-  
   return {
     createAuto,
     getAutoList,
