@@ -23,6 +23,11 @@ const router = createRouter({
       name: "not-found",
       component: () => import("../views/NotFoundPage.vue"),
     },
+    {
+      path: "/car/:id",
+      name: "car",
+      component: () => import("../views/CarIdPage.vue"),
+    },
   ],
 });
 

@@ -76,15 +76,9 @@
                     </label>
                 </form> -->
 
-                <!-- <div class="p-field">
-                    <label for="photo">Картинки</label>
-                    <FileUpload id="photo" v-model="newAuto.image" mode="basic" accept="image/*"
-                        @select="onUpload($event)" />
-                </div> -->
-
                 <div class="p-field">
-                    <label for="travel">Картинка</label>
-                    <FileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" :maxFileSize="1000000"
+                    <label for="photo">Картинка</label>
+                    <FileUpload mode="basic" id="photo"  accept="image/*"
                         @input="onUpload($event)" />
                 </div>
 

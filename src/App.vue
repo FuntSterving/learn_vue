@@ -45,13 +45,13 @@ import { RouterView  } from 'vue-router';
 </script>
 
 <template>
-    <!-- <CarAddModal /> -->
+    <CarAddModal />
     <Navbar />
+    <SideBar /> 
     <router-view />
-    <!-- <SideBar />
-    <CarList />
-    <CarTable />
-    <Footer /> -->
+    <!-- <CarList />
+    <CarTable /> -->
+    <Footer />
 </template>
 
 <style scoped></style>
