@@ -1,13 +1,12 @@
 <script setup>
 
-import CarList from '@/components/CarList.vue';
+
 import Navbar from '@/components/loyauts/Navbar.vue';
 import Footer from '@/components/Footer.vue';
-import CarTable from '@/components/CarTable.vue';
 import SideBar from '@/components/SideBar.vue';
 import CarAddModal from '@/components/CarAddModal.vue';
 import router from './router';
-import { RouterView  } from 'vue-router';
+import { RouterView } from 'vue-router';
 
 
 
@@ -47,10 +46,8 @@ import { RouterView  } from 'vue-router';
 <template>
     <CarAddModal />
     <Navbar />
-    <SideBar /> 
+    <SideBar />
     <router-view />
-    <!-- <CarList />
-    <CarTable /> -->
     <Footer />
 </template>
 

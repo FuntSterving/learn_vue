@@ -4,13 +4,21 @@ import InputText from 'primevue/inputtext';
 import Button from 'primevue/button'
 import Toast from 'primevue/toast';
 
+import { useRoute } from 'vue-router';
+import { useRouter } from 'vue-router';
+
+const route = useRoute();
+const router = useRouter();
 
 
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 
 import { useToast } from "primevue/usetoast";
 const toast = useToast();
+
+
+const actvie = ref(0);
 
 const googleRegister = () => {
   const auth = getAuth()
@@ -70,10 +78,25 @@ const items = ref([
 ]);
 </script>
 <template>
-  <Menubar :model="items" class="menuBar">
+  <Menubar v-model:activIndex="activ" :model="items" class="menuBar">
     <template #start>
       <img alt="logo" src="https://www.nicepng.com/png/full/920-9203332_car-logo-png-hot-wheels-car-svg.png" height="45"
         class="mr-2" />
+    </template>
+    
+    <template #item="{ label, item, props, root, hasSubmenu }">
+      <router-link v-if="item.route" v-slot="routerProps" :to="item.route" custom>
+        <a :href="routerProps.href" v-bind="props.action">
+          <span v-bind="props.icon" />
+          <span v-bind="props.label">{{ label }}</span>
+        </a>
+      </router-link>
+      <a v-else :href="item.url" :target="item.target" v-bind="props.action">
+        <span v-bind="props.icon" />
+        <span v-bind="props.label">{{ label }}</span>
+        <span :class="[hasSubmenu && (root ? 'pi pi-fw pi-angle-down' : 'pi pi-fw pi-angle-right')]"
+          v-bind="props.submenuicon" />
+      </a>
     </template>
 
     <template #end>

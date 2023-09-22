@@ -65,16 +65,6 @@
                     </div>
                 </div>
 
-                <!-- <form class="input__wrapper" enctype="multipart/form-data">
-                    <input id="inputfile" class="input inputfile" name="images" type="file" accept=".jpg, .png"
-                        @input="onUpload($event)" />
-                    <label for="inputfile" class="inputfile-button">
-                        <span class="input__file-icon-wrapper">
-                            <img class="input__file-icon" src="@/assets/Upload-Image.png" alt="Выбрать файл" width="25" />
-                        </span>
-                        <span class="input__file-button-text">Машинка</span>
-                    </label>
-                </form> -->
 
                 <div class="p-field">
                     <label for="photo">Картинка</label>
@@ -105,10 +95,7 @@ import { useAuto } from '@/composable/useAuto';
 import FileUpload from 'primevue/fileupload';
 
 
-
 const { newAuto, createAuto, loading, clear, uploadImage } = useAuto()
-
-
 
 
 const visible = ref(false);
