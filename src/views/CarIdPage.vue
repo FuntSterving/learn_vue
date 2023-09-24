@@ -5,56 +5,38 @@
             <i class="pi pi-spin pi-truck" style="font-size: 2rem;" id="spinner"></i>
         </div>
         <div v-if="auto" class="car-card">
+            <img :src="auto.image" alt="Car" class="car-image" />
+            <div class="car-info">
+                <h2 class="car-brand">{{ auto.brand }}</h2>
+                <p class="car-price">{{ auto.price }} тг</p>
+                <p class="car-year">Год выпуска: {{ new Date(auto.year.seconds * 1000).getFullYear() }}</p>
+                <p class="car-volume">Объем двигателя: {{ auto.volume }} л</p>
+                <p class="car-color" :style="'color: #' + auto.color">Цвет: {{ auto.color }}</p>
+                <p class="car-city">Город: {{ auto.city }}</p>
+                <p class="car-carcase">Кузов: {{ auto.carcase }}</p>
+                <p class="car-gear">Коробка передач: {{ auto.gear }}</p>
+                <p class="car-travel">Пробег: {{ auto.travel }} км</p>
 
+                <div class="card flex justify-content-center" style="border: none;">
+                    <div class="button-rating-container">
+                        <Rating v-model="value" />
+                        <button class="buy-button" :disabled="auto.saled">Купить</button>
+                    </div>
+                </div>
 
-            <Card style="width: 50em; " class="card">
-                <template #header>
-                    <img :src="auto.image" alt="" style="width: 250px; height: 150px;">
-                </template>
-                <template #title> {{ auto.brand }} </template>
-                <template #content>
-                    <p>Цена: {{ auto.price }}</p>
-                    <p>Год выпуска: {{ auto.year }}</p>
-                    <p>Объем двигателя: {{ auto.volume }}</p>
-                    <p :style="`color: ${auto.color}`">Цвет: {{ auto.color }}</p>
-                </template>
-                <template #footer>
-
-                    <!-- <Chip v-if="Number(carRemake.price.slice(0, -1)) > 1000000" label="Дорогой" icon="pi pi-apple" />
-                  <Chip v-else-if="Number(carRemake.year) <= 1960" label="Старый" icon="pi pi-history" />
-                  <Chip v-else label="Скучный" icon="pi-briefcase" />
-                  <Chip v-if="changeColor(carRemake.color)" label="Конченный цвет" icon="pi pi-eye-slash" /> -->
-
-                </template>
-            </Card>
-            <!-- <img :src="auto.image" alt="Car" class="car-image" /> 
-            <div class="car-info"> 
-                <h2 class="car-brand">{{ auto.brand }}</h2> 
-                <p class="car-price">{{ auto.price }} тг</p> 
-                <p class="car-year">Год выпуска: {{ new Date(auto.year.seconds * 1000).getFullYear() }}</p> 
-                <p class="car-volume">Объем двигателя: {{ auto.volume }} л</p> 
-                <p class="car-color" :style="'color: #' + auto.color">Цвет: {{ auto.color }}</p> 
-                <p class="car-city">Город: {{ auto.city }}</p> 
-                <p class="car-carcase">Кузов: {{ auto.carcase }}</p> 
-                <p class="car-gear">Коробка передач: {{ auto.gear }}</p> 
-                <p class="car-travel">Пробег: {{ auto.travel }} км</p> 
-                <button class="buy-button" :disabled="auto.saled">Купить</button> 
- 
-            </div>  -->
+            </div>
         </div>
     </div>
 </template> 
+
+
  
 <script setup>
 import { useAuto } from '../composable/useAuto';
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import Skeleton from 'primevue/skeleton';
-import Card from 'primevue/card';
-// import Navbar from '../components/layouts/Navbar.vue'; 
-
-
-
+import Rating from 'primevue/rating';
 const { auto, getAuto, loading } = useAuto();
 const route = useRoute();
 
@@ -65,17 +47,18 @@ onMounted(async () => {
 
 });
 
+const value = ref(null);
+
 </script> 
  
 <style scoped> .car-details-container {
-     background-color: #dbdfe4;
+     background-color: #eff3f8;
      display: flex;
      justify-content: center;
      align-items: center;
-     height: 70vh;
+     height: 80vh;
      border-radius: 3px;
-     border: 1px solid #dee2e6;
-     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+ 
  }
 
  .car-card {
@@ -84,14 +67,15 @@ onMounted(async () => {
      border-radius: 8px;
      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
      border: 1px solid #dee2e6;
-     width: 1000px;
+     width: 1200px;
+     height: 500px;
      padding: 20px;
  }
 
  .car-image {
      width: 500px;
      height: 500px;
-     object-fit: cover;
+     object-fit: contain;
      border-radius: 8px;
      margin-right: 20px;
      transition: 1s;
@@ -105,7 +89,7 @@ onMounted(async () => {
      flex: 1;
      display: flex;
      flex-direction: column;
-     gap: 10px;
+
  }
 
  .car-brand {
@@ -132,22 +116,44 @@ onMounted(async () => {
 
 
  .buy-button {
-     background-color: #007bff;
-     color: #fff;
+     background-color: #ffbf00;
+     color: #ffffff;
      border: none;
      border-radius: 4px;
      padding: 10px 20px;
      font-size: 16px;
      cursor: pointer;
      transition: background-color 0.3s;
+     width: 25%;
+
  }
 
  .buy-button:hover {
-     background-color: #0056b3;
+     background-color: #e9edf3;
+     color: #708da9;
+     border-radius: 3px;
+     border: 1px solid #dee2e6;
+     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
  }
 
  .buy-button:disabled {
      background-color: #ccc;
      cursor: not-allowed;
+ }
+
+ .p-rating {
+     position: relative;
+     display: flex;
+     align-items: center;
+     justify-content: flex-end;
+     width: 25%;
+ }
+
+ .button-rating-container {
+    display: flex;
+    align-items: center;
+    justify-content:  space-around;
+    /* margin-top: 20px; */
+    width: 100%;
  }
 </style>

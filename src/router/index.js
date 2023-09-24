@@ -4,6 +4,16 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
+      path: "/",
+      name: "start",
+      component: () => import("../views/HomePage.vue"),
+    },
+    {
+      path: "/home",
+      name: "home",
+      component: () => import("../views/HomePage.vue"),
+    },
+    {
       path: "/table",
       name: "table",
       component: () => import("../views/TablePage.vue"),
@@ -13,10 +23,16 @@ const router = createRouter({
       name: "cards",
       component: () => import("../views/CardPage.vue"),
     },
+
     {
-      path: "/profile",
-      name: "profile",
-      component: () => import("../views/ProfilePage.vue"),
+      path: "/contacts",
+      name: "contacts",
+      component: () => import("../views/ContactsPage.vue"),
+    },
+    {
+      path: "/cart",
+      name: "cart",
+      component: () => import("../views/CartPage.vue"),
     },
     {
       path: "/:pathMach(.*)*",

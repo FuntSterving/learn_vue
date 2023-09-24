@@ -7,6 +7,7 @@ import SideBar from '@/components/SideBar.vue';
 import CarAddModal from '@/components/CarAddModal.vue';
 import router from './router';
 import { RouterView } from 'vue-router';
+import StartPage from '@/components/StartPage.vue';
 
 
 
@@ -44,9 +45,10 @@ import { RouterView } from 'vue-router';
 </script>
 
 <template>
-    <CarAddModal />
+    <!-- <CarAddModal /> -->
     <Navbar />
     <SideBar />
+    <!-- <StartPage /> -->
     <router-view />
     <Footer />
 </template>

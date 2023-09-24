@@ -19,10 +19,11 @@
     background-color: #eff3f8 ; 
     color: #708da9 ; 
     padding: 40px 0; 
-    margin-top: 20px;
+    margin-top: 5px;
     border-radius: 3px;
     border: 1px solid #dee2e6;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    
 }
 
 .footer-content {
